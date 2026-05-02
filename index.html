@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sebastian Pandovski — Video Editor & Content Creator</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%237C3AED'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>SP</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23080808'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>SP</text></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -333,7 +333,7 @@
     .about-link-left { display: flex; align-items: center; gap: 1rem; }
     .about-link-icon {
       width: 40px; height: 40px;
-      background: var(--surface2);
+      background: #000000;
       border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.2rem;
@@ -594,7 +594,7 @@
       Former D1 athlete. University of Wisconsin grad. Now building in Austin.
     </p>
     <div class="hero-cta">
-      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#links" class="btn-primary">View My Work</a>
       <a href="#contact" class="btn-ghost">Get In Touch</a>
     </div>
   </div>
@@ -654,16 +654,13 @@
       </p>
 
     </div>
-    <div class="about-links">
-      <div style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--accent2); letter-spacing:0.25em; text-transform:uppercase; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.75rem;">
-        <span style="width:20px; height:1px; background:var(--accent2); display:inline-block;"></span>
-        Links
-      </div>
+    <div class="about-links" id="links">
+      <h2 class="section-title" style="margin-bottom: 1.5rem;">Links</h2>
       <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="about-link">
         <div class="about-link-left">
           <div class="about-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></div>
           <div>
-            <div class="about-link-text">@fluent_futbol</div>
+            <div class="about-link-text">TikTok Account #1</div>
             <div class="about-link-sub">490K+ followers · 120M+ likes</div>
           </div>
         </div>
@@ -673,25 +670,43 @@
         <div class="about-link-left">
           <div class="about-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></div>
           <div>
-            <div class="about-link-text">@fluent_futbol_ll</div>
+            <div class="about-link-text">TikTok Account #2</div>
             <div class="about-link-sub">204K+ followers · 41M+ likes</div>
           </div>
         </div>
         <div class="about-link-arrow">↗</div>
       </a>
-      <a href="https://d1youthsports.com" target="_blank" class="about-link">
-        <div class="about-link-left">
-          <div class="about-link-icon">⚽</div>
-          <div>
-            <div class="about-link-text">D1 Youth Sports</div>
-            <div class="about-link-sub">Website redesign · Client project</div>
+      <div class="about-link" style="cursor:pointer; flex-direction:column; align-items:stretch; gap:0;" onclick="toggleLinksWebsites(this)">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <div class="about-link-left">
+            <div class="about-link-icon" style="background:#000000;">💼</div>
+            <div>
+              <div class="about-link-text">Websites</div>
+              <div class="about-link-sub">3 client projects</div>
+            </div>
+          </div>
+          <div class="about-link-arrow" style="font-size:0.85rem; transition:transform 0.3s;">▼</div>
+        </div>
+        <div class="links-websites-dropdown" style="max-height:0; overflow:hidden; transition:max-height 0.4s ease;">
+          <div style="padding-top:0.75rem; display:flex; flex-direction:column; gap:0.5rem;">
+            <a href="https://d1youthsports.com" target="_blank" onclick="event.stopPropagation()" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 0.75rem; background:var(--surface2); border-radius:4px; text-decoration:none; border:1px solid var(--border);">
+              <span style="font-size:0.8rem; color:var(--text);">d1youthsports.com</span>
+              <span style="color:var(--accent2);">↗</span>
+            </a>
+            <a href="https://www.outlandmanagement.com/" target="_blank" onclick="event.stopPropagation()" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 0.75rem; background:var(--surface2); border-radius:4px; text-decoration:none; border:1px solid var(--border);">
+              <span style="font-size:0.8rem; color:var(--text);">outlandmanagement.com</span>
+              <span style="color:var(--accent2);">↗</span>
+            </a>
+            <a href="https://www.maverickprocure.com/" target="_blank" onclick="event.stopPropagation()" style="display:flex; align-items:center; justify-content:space-between; padding:0.6rem 0.75rem; background:var(--surface2); border-radius:4px; text-decoration:none; border:1px solid var(--border);">
+              <span style="font-size:0.8rem; color:var(--text);">maverickprocure.com</span>
+              <span style="color:var(--accent2);">↗</span>
+            </a>
           </div>
         </div>
-        <div class="about-link-arrow">↗</div>
-      </a>
+      </div>
       <a href="https://www.linkedin.com/in/sebastian-pandovski-846273402/" target="_blank" class="about-link">
         <div class="about-link-left">
-          <div class="about-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+          <div class="about-link-icon" style="background:#0A66C2;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
           <div>
             <div class="about-link-text">LinkedIn</div>
             <div class="about-link-sub">Sebastian Pandovski</div>
@@ -712,18 +727,18 @@
   </div>
   <div class="work-grid fade-in">
 
-    <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="work-card card-tiktok">
+    <div class="work-card card-tiktok">
       <div class="work-card-img">⚽</div>
       <div class="work-card-body">
         <div class="work-card-cat">Social Media · Content Creation</div>
-        <div class="work-card-title">Fluent Futbol — Brand Build & Exit</div>
+        <div class="work-card-title">Social Media — Brand Build & Exit</div>
         <div class="work-card-desc">Built two football content brands from zero to a combined 700K+ followers and 200M+ total likes organically. Grew, scaled, and successfully exited both accounts.</div>
         <div class="work-card-meta">
           <div class="meta-item">Followers: <span>700K+</span></div>
           <div class="meta-item">Likes: <span>200M+</span></div>
         </div>
       </div>
-    </a>
+    </div>
 
     <div class="work-card card-d1" style="cursor:pointer;" onclick="toggleWebsites(this)">
       <div class="work-card-body">
@@ -759,13 +774,13 @@
           </div>
         </div>
         <div class="work-card-meta" style="margin-top:1rem;">
-          <div class="meta-item">Type: <span>Paid Client</span></div>
+          <div class="meta-item">Type: <span>Paid Clients</span></div>
           <div class="meta-item">Sites: <span>3</span></div>
         </div>
       </div>
     </div>
 
-    <a href="#" class="work-card card-cam">
+    <div class="work-card card-cam">
       <div class="work-card-img">📱</div>
       <div class="work-card-body">
         <div class="work-card-cat">Paid Media · Meta Ads</div>
@@ -776,23 +791,22 @@
           <div class="meta-item">Year: <span>2025</span></div>
         </div>
       </div>
-    </a>
+    </div>
 
-    <a href="#" class="work-card card-vid">
+    <div class="work-card card-vid">
       <div class="work-card-img">🎬</div>
       <div class="work-card-body">
         <div class="work-card-cat">Video Editing · Post Production</div>
         <div class="work-card-title">Short Form Video — 200+ Videos</div>
-        <div class="work-card-desc">Produced, edited, and published 200+ short-form videos using Adobe Premiere Pro, CapCut, and DaVinci Resolve Studio. Grew average views by 300%+ through data-driven optimization.</div>
+        <div class="work-card-desc">Produced, edited, and published 300+ short-form videos using Adobe Premiere Pro, CapCut, and DaVinci Resolve Studio. Grew average views by 300%+ through data-driven optimization.</div>
         <div class="work-card-meta">
-          <div class="meta-item">Videos: <span>200+</span></div>
+          <div class="meta-item">Videos: <span>300+</span></div>
           <div class="meta-item">Growth: <span>300%+</span></div>
         </div>
       </div>
-    </a>
+    </div>
 
-    <a href="#" class="work-card card-design">
-      <div class="work-card-img">🎨</div>
+    <div class="work-card card-design">
       <div class="work-card-body">
         <div class="work-card-cat">Graphic Design · Branding</div>
         <div class="work-card-title">Brand Assets & Graphic Design</div>
@@ -802,41 +816,34 @@
           <div class="meta-item">Type: <span>Multi-project</span></div>
         </div>
       </div>
-    </a>
+    </div>
 
     <div class="work-card card-design">
       <div class="work-card-body">
         <div class="work-card-cat">Graphic Design · Branding</div>
         <div class="work-card-title">Logo Design</div>
-        <div class="work-card-desc" style="display:flex; flex-direction:column; gap:1rem; padding:1rem 0;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px;">
-            <div style="display:flex; align-items:center; gap:0.75rem;">
-              <img src="fastlane.png" style="width:48px; height:48px; border-radius:4px; object-fit:contain; background:#000; padding:2px;" />
-              <div>
-                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">Fast Lane Track Club</div>
-                <div style="font-size:0.72rem; color:var(--muted);">Brand identity · Apparel & merch logo</div>
+        <div class="work-card-desc" style="padding:1rem 0;">
+          <div style="display:flex; gap:1rem; justify-content:center; align-items:center; margin-bottom:1rem;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+              <div style="width:64px; height:64px; border-radius:50%; overflow:hidden; border:2px solid var(--border); background:#000; display:flex; align-items:center; justify-content:center;">
+                <img src="fastlane.png" style="width:100%; height:100%; object-fit:cover;" />
               </div>
+              <span style="font-size:0.65rem; color:var(--muted); text-align:center;">Fast Lane</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+              <div style="width:64px; height:64px; border-radius:50%; overflow:hidden; border:2px solid var(--border); background:#fff; display:flex; align-items:center; justify-content:center;">
+                <img src="luxe.png" style="width:100%; height:100%; object-fit:cover;" />
+              </div>
+              <span style="font-size:0.65rem; color:var(--muted); text-align:center;">Luxe Golf</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem;">
+              <div style="width:64px; height:64px; border-radius:50%; overflow:hidden; border:2px solid var(--border); background:#f5c800; display:flex; align-items:center; justify-content:center;">
+                <img src="d1logo.png" style="width:100%; height:100%; object-fit:cover;" />
+              </div>
+              <span style="font-size:0.65rem; color:var(--muted); text-align:center;">D1 Youth Sports</span>
             </div>
           </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px;">
-            <div style="display:flex; align-items:center; gap:0.75rem;">
-              <img src="luxe.png" style="width:48px; height:48px; border-radius:4px; object-fit:contain; background:#fff; padding:2px;" />
-              <div>
-                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">Luxe Golf Leagues</div>
-                <div style="font-size:0.72rem; color:var(--muted);">Brand identity · Logo design</div>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px;">
-            <div style="display:flex; align-items:center; gap:0.75rem;">
-              <img src="https://d1youthsports.com/favicon.ico" style="width:48px; height:48px; border-radius:4px; object-fit:contain; background:#fff; padding:2px;" onerror="this.style.display='none'" />
-              <div>
-                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">D1 Youth Sports</div>
-                <div style="font-size:0.72rem; color:var(--muted);">Brand identity & logo</div>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:center; padding:0.5rem 0; color:var(--muted); font-size:0.8rem;">+ More logos coming soon</div>
+          <div style="text-align:center; color:var(--muted); font-size:0.78rem;">+ More logos coming soon</div>
         </div>
         <div class="work-card-meta">
           <div class="meta-item">Type: <span>Branding</span></div>
@@ -967,46 +974,108 @@
     canvas.height = h;
     const ctx = canvas.getContext('2d');
 
-    const points = [];
-    const numPoints = 40;
-    let val = h * 0.85;
-    for (let i = 0; i < numPoints; i++) {
-      val += (Math.random() - 0.38) * (h * 0.1);
-      val = Math.max(h * 0.15, Math.min(h * 0.9, val));
-      points.push({ x: (i / (numPoints - 1)) * w, y: val });
-    }
-    points[points.length - 1].y = h * 0.08 + Math.random() * h * 0.08;
+    // Sharp upward trending points like the red arrow style
+    const points = [
+      { x: 0, y: h * 0.85 },
+      { x: w * 0.05, y: h * 0.80 },
+      { x: w * 0.10, y: h * 0.83 },
+      { x: w * 0.15, y: h * 0.75 },
+      { x: w * 0.20, y: h * 0.78 },
+      { x: w * 0.25, y: h * 0.68 },
+      { x: w * 0.30, y: h * 0.72 },
+      { x: w * 0.35, y: h * 0.60 },
+      { x: w * 0.40, y: h * 0.65 },
+      { x: w * 0.45, y: h * 0.52 },
+      { x: w * 0.50, y: h * 0.55 },
+      { x: w * 0.55, y: h * 0.42 },
+      { x: w * 0.60, y: h * 0.46 },
+      { x: w * 0.65, y: h * 0.32 },
+      { x: w * 0.70, y: h * 0.36 },
+      { x: w * 0.75, y: h * 0.22 },
+      { x: w * 0.80, y: h * 0.26 },
+      { x: w * 0.85, y: h * 0.15 },
+      { x: w * 0.90, y: h * 0.18 },
+      { x: w * 0.95, y: h * 0.10 },
+      { x: w * 1.00, y: h * 0.05 },
+    ];
 
-    let progress = 0;
-    const duration = 1500;
-    const start = performance.now();
+    const duration = 2200;
+    let startTime = null;
 
     function animate(now) {
-      progress = Math.min((now - start) / duration, 1);
-      ctx.clearRect(0, 0, w, h);
-      const numVisible = Math.max(2, Math.floor(progress * numPoints));
+      if (!startTime) startTime = now;
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
 
+      ctx.clearRect(0, 0, w, h);
+
+      const numVisible = Math.max(2, Math.floor(progress * points.length));
+      const visiblePoints = points.slice(0, numVisible);
+
+      // Partially draw the next segment
+      if (numVisible < points.length && progress < 1) {
+        const segProgress = (progress * points.length) % 1;
+        const next = points[numVisible];
+        const prev = points[numVisible - 1];
+        const interp = {
+          x: prev.x + (next.x - prev.x) * segProgress,
+          y: prev.y + (next.y - prev.y) * segProgress,
+        };
+        visiblePoints.push(interp);
+      }
+
+      // Fill gradient under line
       ctx.beginPath();
-      ctx.moveTo(points[0].x, h);
-      ctx.lineTo(points[0].x, points[0].y);
-      for (let i = 1; i < numVisible; i++) ctx.lineTo(points[i].x, points[i].y);
-      ctx.lineTo(points[numVisible - 1].x, h);
+      ctx.moveTo(visiblePoints[0].x, h);
+      ctx.lineTo(visiblePoints[0].x, visiblePoints[0].y);
+      for (let i = 1; i < visiblePoints.length; i++) {
+        ctx.lineTo(visiblePoints[i].x, visiblePoints[i].y);
+      }
+      ctx.lineTo(visiblePoints[visiblePoints.length - 1].x, h);
       ctx.closePath();
       const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0, 'rgba(16,185,129,0.4)');
+      grad.addColorStop(0, 'rgba(16,185,129,0.25)');
       grad.addColorStop(1, 'rgba(16,185,129,0)');
       ctx.fillStyle = grad;
       ctx.fill();
 
+      // Draw the line
       ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y);
-      for (let i = 1; i < numVisible; i++) ctx.lineTo(points[i].x, points[i].y);
+      ctx.moveTo(visiblePoints[0].x, visiblePoints[0].y);
+      for (let i = 1; i < visiblePoints.length; i++) {
+        ctx.lineTo(visiblePoints[i].x, visiblePoints[i].y);
+      }
       ctx.strokeStyle = '#10B981';
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = 3;
+      ctx.lineJoin = 'round';
       ctx.stroke();
 
-      if (progress < 1) requestAnimationFrame(animate);
+      // Draw arrowhead at current tip
+      const last = visiblePoints[visiblePoints.length - 1];
+      const prev = visiblePoints[visiblePoints.length - 2];
+      if (prev) {
+        const angle = Math.atan2(last.y - prev.y, last.x - prev.x);
+        const arrowSize = 10;
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(last.x - arrowSize * Math.cos(angle - 0.4), last.y - arrowSize * Math.sin(angle - 0.4));
+        ctx.lineTo(last.x - arrowSize * Math.cos(angle + 0.4), last.y - arrowSize * Math.sin(angle + 0.4));
+        ctx.closePath();
+        ctx.fillStyle = '#10B981';
+        ctx.fill();
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        // Restart after 800ms pause
+        setTimeout(() => {
+          startTime = null;
+          requestAnimationFrame(animate);
+        }, 800);
+      }
     }
+
     requestAnimationFrame(animate);
   }
 
@@ -1028,6 +1097,20 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Links section websites dropdown
+  function toggleLinksWebsites(card) {
+    const dropdown = card.querySelector('.links-websites-dropdown');
+    const arrow = card.querySelector('.about-link-arrow');
+    const isOpen = dropdown.style.maxHeight !== '0px' && dropdown.style.maxHeight !== '';
+    if (isOpen) {
+      dropdown.style.maxHeight = '0';
+      arrow.style.transform = 'rotate(0deg)';
+    } else {
+      dropdown.style.maxHeight = '200px';
+      arrow.style.transform = 'rotate(180deg)';
+    }
+  }
 
   // Websites dropdown toggle
   function toggleWebsites(card) {
