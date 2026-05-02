@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sebastian Pandovski — Video Editor & Content Creator</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%237C3AED'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='Arial Black,sans-serif' font-weight='900' fill='white'>SP</text></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -31,25 +32,15 @@
 
     /* Custom cursor */
     .cursor {
-      width: 12px; height: 12px;
+      width: 10px; height: 10px;
       background: var(--accent2);
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      transition: transform 0.15s ease;
-      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
     }
-    .cursor-ring {
-      width: 36px; height: 36px;
-      border: 1px solid var(--accent2);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.1s ease;
-      opacity: 0.5;
-    }
+    .cursor-ring { display: none; }
 
     /* NAV */
     nav {
@@ -211,12 +202,23 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #stats-canvas {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.12;
+      pointer-events: none;
     }
 
     .stat {
       text-align: center;
       padding: 2rem 1rem;
       position: relative;
+      z-index: 2;
     }
     .stat::after {
       content: '';
@@ -399,6 +401,8 @@
     .card-social .work-card-img::before { background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(16,185,129,0.2)); }
 
     .work-card-body { padding: 1.5rem; }
+    
+    .work-card-img { display: none; }
 
     .work-card-cat {
       font-size: 0.65rem;
@@ -587,7 +591,7 @@
     <p class="hero-tagline">
       <strong>Video Editor & Content Creator</strong> who built two social media brands to
       <strong>700K+ followers</strong> and <strong>200M+ likes</strong> from scratch.
-      D1 athlete. UW-Madison grad. Now building in Austin.
+      Former D1 athlete. University of Wisconsin grad. Now building in Austin.
     </p>
     <div class="hero-cta">
       <a href="#work" class="btn-primary">View My Work</a>
@@ -599,6 +603,7 @@
 
 <!-- STATS -->
 <div class="stats fade-in">
+  <canvas id="stats-canvas"></canvas>
   <div class="stat">
     <div class="stat-num">700K+</div>
     <div class="stat-label">Combined Followers</div>
@@ -638,38 +643,38 @@
         without a budget or a team.
       </p>
       <p>
+        I also work as a <strong>Voice Actor & Model</strong> through <strong>Model and Talent Management (MTM)</strong>,
+        developing on-camera presence, vocal delivery, and professional performance technique
+        across commercial and digital media projects.
+      </p>
+      <p>
         Before going all-in on content, I was a <strong>Division I soccer player</strong> at
         UW-Milwaukee and graduated from <strong>UW-Madison</strong> with a degree in Art and
         a Certificate in Video Editing & Graphic Design.
       </p>
-      <div class="about-tags">
-        <span class="tag">Video Editing</span>
-        <span class="tag">Thumbnail Design</span>
-        <span class="tag">Social Media</span>
-        <span class="tag">Meta Ads</span>
-        <span class="tag">Web Design</span>
-        <span class="tag">Content Strategy</span>
-        <span class="tag">D1 Athlete</span>
-        <span class="tag">Austin TX</span>
-      </div>
+
     </div>
     <div class="about-links">
+      <div style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--accent2); letter-spacing:0.25em; text-transform:uppercase; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.75rem;">
+        <span style="width:20px; height:1px; background:var(--accent2); display:inline-block;"></span>
+        Links
+      </div>
       <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="about-link">
         <div class="about-link-left">
-          <div class="about-link-icon">🎵</div>
+          <div class="about-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></div>
           <div>
             <div class="about-link-text">@fluent_futbol</div>
-            <div class="about-link-sub">492K followers · 117M likes</div>
+            <div class="about-link-sub">490K+ followers · 120M+ likes</div>
           </div>
         </div>
         <div class="about-link-arrow">↗</div>
       </a>
       <a href="https://www.tiktok.com/@fluent_futbol_ll" target="_blank" class="about-link">
         <div class="about-link-left">
-          <div class="about-link-icon">🎵</div>
+          <div class="about-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></div>
           <div>
             <div class="about-link-text">@fluent_futbol_ll</div>
-            <div class="about-link-sub">204K followers · 40.5M likes</div>
+            <div class="about-link-sub">204K+ followers · 41M+ likes</div>
           </div>
         </div>
         <div class="about-link-arrow">↗</div>
@@ -684,9 +689,9 @@
         </div>
         <div class="about-link-arrow">↗</div>
       </a>
-      <a href="https://www.linkedin.com/in/sebastianpandovski" target="_blank" class="about-link">
+      <a href="https://www.linkedin.com/in/sebastian-pandovski-846273402/" target="_blank" class="about-link">
         <div class="about-link-left">
-          <div class="about-link-icon">💼</div>
+          <div class="about-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
           <div>
             <div class="about-link-text">LinkedIn</div>
             <div class="about-link-sub">Sebastian Pandovski</div>
@@ -703,7 +708,7 @@
   <div class="fade-in">
     <div class="section-label">What I've Built</div>
     <h2 class="section-title">Selected Work</h2>
-    <p class="section-sub">From viral social media brands to paid campaigns and web redesigns — here is what I have built.</p>
+    <p class="section-sub">From viral social media brands to paid campaigns and web redesigns — here's what I've built.</p>
   </div>
   <div class="work-grid fade-in">
 
@@ -720,25 +725,52 @@
       </div>
     </a>
 
-    <a href="https://d1youthsports.com" target="_blank" class="work-card card-d1">
-      <div class="work-card-img">🌐</div>
+    <div class="work-card card-d1" style="cursor:pointer;" onclick="toggleWebsites(this)">
       <div class="work-card-body">
         <div class="work-card-cat">Web Design · Development</div>
-        <div class="work-card-title">D1 Youth Sports — Website Redesign</div>
-        <div class="work-card-desc">Full redesign of d1youthsports.com for a sports organization with 500+ registered youth athletes. Designed all visual assets, UX, and layout from concept through launch.</div>
-        <div class="work-card-meta">
+        <div class="work-card-title" style="display:flex; justify-content:space-between; align-items:center;">
+          Website Redesign & Development
+          <span class="dropdown-arrow" style="font-size:0.9rem; color:var(--muted); transition: transform 0.3s;">▼</span>
+        </div>
+        <div class="work-card-desc">Designed and developed numerous websites for clients across sports, management, and procurement industries — handling all visual assets, UX, and layout from concept through production launch.</div>
+        <div class="websites-dropdown" style="max-height:0; overflow:hidden; transition: max-height 0.4s ease;">
+          <div style="padding-top:1rem; border-top: 1px solid var(--border); margin-top:1rem; display:flex; flex-direction:column; gap:0.75rem;">
+            <a href="https://d1youthsports.com" target="_blank" style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent2)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div>
+                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">D1 Youth Sports</div>
+                <div style="font-size:0.72rem; color:var(--muted);">d1youthsports.com</div>
+              </div>
+              <span style="color:var(--accent2); font-size:1rem;">↗</span>
+            </a>
+            <a href="https://www.outlandmanagement.com/" target="_blank" style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent2)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div>
+                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">Outland Management</div>
+                <div style="font-size:0.72rem; color:var(--muted);">outlandmanagement.com</div>
+              </div>
+              <span style="color:var(--accent2); font-size:1rem;">↗</span>
+            </a>
+            <a href="https://www.maverickprocure.com/" target="_blank" style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px; text-decoration:none; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent2)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div>
+                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">Maverick Procure</div>
+                <div style="font-size:0.72rem; color:var(--muted);">maverickprocure.com</div>
+              </div>
+              <span style="color:var(--accent2); font-size:1rem;">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="work-card-meta" style="margin-top:1rem;">
           <div class="meta-item">Type: <span>Paid Client</span></div>
-          <div class="meta-item">Year: <span>2025</span></div>
+          <div class="meta-item">Sites: <span>3</span></div>
         </div>
       </div>
-    </a>
+    </div>
 
     <a href="#" class="work-card card-cam">
       <div class="work-card-img">📱</div>
       <div class="work-card-body">
         <div class="work-card-cat">Paid Media · Meta Ads</div>
         <div class="work-card-title">Cam Will — Meta Ads Campaign</div>
-        <div class="work-card-desc">Planned and executed a full Meta Ads campaign across Facebook and Instagram. Managed creative, audience targeting, budget allocation, and performance optimization.</div>
+        <div class="work-card-desc">Planned and executed a full Meta Ads campaign for popular artist Cam Will across Facebook and Instagram. Managed creative, audience targeting, budget allocation, and performance optimization.</div>
         <div class="work-card-meta">
           <div class="meta-item">Platform: <span>Meta</span></div>
           <div class="meta-item">Year: <span>2025</span></div>
@@ -764,7 +796,7 @@
       <div class="work-card-body">
         <div class="work-card-cat">Graphic Design · Branding</div>
         <div class="work-card-title">Brand Assets & Graphic Design</div>
-        <div class="work-card-desc">Created brand identities, thumbnails, social graphics, and visual assets across multiple projects using Adobe Photoshop, Illustrator, Canva, and AI design tools.</div>
+        <div class="work-card-desc">Created numerous logos and brand identities, thumbnails, social graphics, and visual assets across multiple projects using Adobe Photoshop, Illustrator, Canva, and AI design tools.</div>
         <div class="work-card-meta">
           <div class="meta-item">Tools: <span>Adobe Suite</span></div>
           <div class="meta-item">Type: <span>Multi-project</span></div>
@@ -772,18 +804,61 @@
       </div>
     </a>
 
-    <a href="https://www.tiktok.com/@fluent_futbol_ll" target="_blank" class="work-card card-social">
-      <div class="work-card-img">📊</div>
+    <div class="work-card card-design">
       <div class="work-card-body">
-        <div class="work-card-cat">Social Strategy · Analytics</div>
-        <div class="work-card-title">Multi-Platform Content Strategy</div>
-        <div class="work-card-desc">Managed simultaneous content distribution across TikTok, Instagram, and YouTube Shorts. Used platform analytics to optimize posting cadence, formats, and engagement tactics.</div>
+        <div class="work-card-cat">Graphic Design · Branding</div>
+        <div class="work-card-title">Logo Design</div>
+        <div class="work-card-desc" style="display:flex; flex-direction:column; gap:1rem; padding:1rem 0;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px;">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <img src="fastlane.png" style="width:48px; height:48px; border-radius:4px; object-fit:contain; background:#000; padding:2px;" />
+              <div>
+                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">Fast Lane Track Club</div>
+                <div style="font-size:0.72rem; color:var(--muted);">Brand identity · Apparel & merch logo</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px;">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <img src="luxe.png" style="width:48px; height:48px; border-radius:4px; object-fit:contain; background:#fff; padding:2px;" />
+              <div>
+                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">Luxe Golf Leagues</div>
+                <div style="font-size:0.72rem; color:var(--muted);">Brand identity · Logo design</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; background:var(--surface2); border:1px solid var(--border); border-radius:4px;">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <img src="https://d1youthsports.com/favicon.ico" style="width:48px; height:48px; border-radius:4px; object-fit:contain; background:#fff; padding:2px;" onerror="this.style.display='none'" />
+              <div>
+                <div style="font-size:0.85rem; font-weight:500; color:var(--text);">D1 Youth Sports</div>
+                <div style="font-size:0.72rem; color:var(--muted);">Brand identity & logo</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:center; padding:0.5rem 0; color:var(--muted); font-size:0.8rem;">+ More logos coming soon</div>
+        </div>
         <div class="work-card-meta">
-          <div class="meta-item">Platforms: <span>4+</span></div>
-          <div class="meta-item">Accounts: <span>Sold</span></div>
+          <div class="meta-item">Type: <span>Branding</span></div>
+          <div class="meta-item">Logos: <span>3+</span></div>
         </div>
       </div>
-    </a>
+    </div>
+
+    <div class="work-card card-social">
+      <div class="work-card-body">
+        <div class="work-card-cat">Thumbnail Design · YouTube</div>
+        <div class="work-card-title">Thumbnail Design</div>
+        <div class="work-card-desc" style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 0; gap:0.75rem;">
+          <span style="font-size:2rem;">🖼️</span>
+          <span style="color:var(--muted); font-size:0.85rem; text-align:center;">Thumbnail samples coming soon</span>
+        </div>
+        <div class="work-card-meta">
+          <div class="meta-item">Type: <span>YouTube</span></div>
+          <div class="meta-item">Status: <span>Coming Soon</span></div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -857,25 +932,11 @@
           <div class="contact-card-sub">seb.pando10@gmail.com</div>
         </div>
       </a>
-      <a href="https://www.linkedin.com/in/sebastianpandovski" target="_blank" class="contact-card">
-        <div class="contact-icon">💼</div>
+      <a href="https://www.linkedin.com/in/sebastian-pandovski-846273402/" target="_blank" class="contact-card">
+        <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
         <div>
           <div class="contact-card-text">LinkedIn</div>
           <div class="contact-card-sub">Sebastian Pandovski</div>
-        </div>
-      </a>
-      <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="contact-card">
-        <div class="contact-icon">🎵</div>
-        <div>
-          <div class="contact-card-text">TikTok</div>
-          <div class="contact-card-sub">@fluent_futbol</div>
-        </div>
-      </a>
-      <a href="https://www.tiktok.com/@fluent_futbol_ll" target="_blank" class="contact-card">
-        <div class="contact-icon">🎵</div>
-        <div>
-          <div class="contact-card-text">TikTok II</div>
-          <div class="contact-card-sub">@fluent_futbol_ll</div>
         </div>
       </a>
     </div>
@@ -891,15 +952,75 @@
 <script>
   // Custom cursor
   const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
   document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX - 6 + 'px';
-    cursor.style.top = e.clientY - 6 + 'px';
-    ring.style.left = e.clientX - 18 + 'px';
-    ring.style.top = e.clientY - 18 + 'px';
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
   });
 
-  // Fade in on scroll
+  // Single full-width stock chart behind all stats
+  function drawStockChart() {
+    const canvas = document.getElementById('stats-canvas');
+    if (!canvas) return;
+    const w = canvas.parentElement.offsetWidth;
+    const h = canvas.parentElement.offsetHeight;
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+
+    const points = [];
+    const numPoints = 40;
+    let val = h * 0.85;
+    for (let i = 0; i < numPoints; i++) {
+      val += (Math.random() - 0.38) * (h * 0.1);
+      val = Math.max(h * 0.15, Math.min(h * 0.9, val));
+      points.push({ x: (i / (numPoints - 1)) * w, y: val });
+    }
+    points[points.length - 1].y = h * 0.08 + Math.random() * h * 0.08;
+
+    let progress = 0;
+    const duration = 1500;
+    const start = performance.now();
+
+    function animate(now) {
+      progress = Math.min((now - start) / duration, 1);
+      ctx.clearRect(0, 0, w, h);
+      const numVisible = Math.max(2, Math.floor(progress * numPoints));
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, h);
+      ctx.lineTo(points[0].x, points[0].y);
+      for (let i = 1; i < numVisible; i++) ctx.lineTo(points[i].x, points[i].y);
+      ctx.lineTo(points[numVisible - 1].x, h);
+      ctx.closePath();
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, 'rgba(16,185,129,0.4)');
+      grad.addColorStop(1, 'rgba(16,185,129,0)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < numVisible; i++) ctx.lineTo(points[i].x, points[i].y);
+      ctx.strokeStyle = '#10B981';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      if (progress < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
+  const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(drawStockChart, 200);
+        statObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsEl = document.querySelector('.stats');
+  if (statsEl) statObserver.observe(statsEl);
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) e.target.classList.add('visible');
@@ -907,6 +1028,20 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Websites dropdown toggle
+  function toggleWebsites(card) {
+    const dropdown = card.querySelector('.websites-dropdown');
+    const arrow = card.querySelector('.dropdown-arrow');
+    const isOpen = dropdown.style.maxHeight !== '0px' && dropdown.style.maxHeight !== '';
+    if (isOpen) {
+      dropdown.style.maxHeight = '0';
+      arrow.style.transform = 'rotate(0deg)';
+    } else {
+      dropdown.style.maxHeight = '300px';
+      arrow.style.transform = 'rotate(180deg)';
+    }
+  }
 </script>
 
 </body>
