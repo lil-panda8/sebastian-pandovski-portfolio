@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sebastian Pandovski — Video Editor & Content Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --accent: #7C3AED;
+      --accent2: #10B981;
+      --text: #f0f0f0;
+      --muted: #888;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--accent2);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--accent2);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.1s ease;
+      opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(124,58,237,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(16,185,129,0.08) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent2);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--accent2);
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name span {
+      display: block;
+      background: linear-gradient(135deg, #fff 0%, rgba(124,58,237,0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2.2rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.1);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(124,58,237,0.4); }
+
+    .btn-ghost {
+      padding: 0.9rem 2.2rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--muted);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { width: 40px; opacity: 1; }
+      50% { width: 20px; opacity: 0.4; }
+    }
+
+    /* STATS */
+    .stats {
+      padding: 5rem 3rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+    .stat::after {
+      content: '';
+      position: absolute; right: 0; top: 20%; bottom: 20%;
+      width: 1px; background: var(--border);
+    }
+    .stat:last-child::after { display: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent2);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--accent2);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.03em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 550px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--text); }
+
+    .about-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .tag {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    .about-links {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+
+    .about-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      group: true;
+    }
+    .about-link:hover {
+      border-color: var(--accent2);
+      transform: translateX(4px);
+      background: var(--surface2);
+    }
+
+    .about-link-left { display: flex; align-items: center; gap: 1rem; }
+    .about-link-icon {
+      width: 40px; height: 40px;
+      background: var(--surface2);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .about-link-text { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+    .about-link-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+    .about-link-arrow { color: var(--muted); font-size: 1.2rem; transition: transform 0.2s; }
+    .about-link:hover .about-link-arrow { transform: translate(3px, -3px); color: var(--accent2); }
+
+    /* WORK */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+    .work-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .work-card-img {
+      height: 180px;
+      background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-card-img::before {
+      content: '';
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .work-card:hover .work-card-img::before { opacity: 1; }
+
+    .card-tiktok .work-card-img { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+    .card-tiktok .work-card-img::before { background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(16,185,129,0.2)); }
+
+    .card-d1 .work-card-img { background: linear-gradient(135deg, #1a2a1a, #162116); }
+    .card-d1 .work-card-img::before { background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(124,58,237,0.2)); }
+
+    .card-cam .work-card-img { background: linear-gradient(135deg, #2a1a1a, #211616); }
+    .card-cam .work-card-img::before { background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(124,58,237,0.2)); }
+
+    .card-vid .work-card-img { background: linear-gradient(135deg, #1a1a2a, #16162a); }
+    .card-vid .work-card-img::before { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(16,185,129,0.2)); }
+
+    .card-design .work-card-img { background: linear-gradient(135deg, #2a1a2a, #211621); }
+    .card-design .work-card-img::before { background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(124,58,237,0.2)); }
+
+    .card-social .work-card-img { background: linear-gradient(135deg, #1a2a2a, #162121); }
+    .card-social .work-card-img::before { background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(16,185,129,0.2)); }
+
+    .work-card-body { padding: 1.5rem; }
+
+    .work-card-cat {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.5rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .work-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .work-card-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .work-card-meta {
+      display: flex; gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+    }
+    .meta-item span { color: var(--text); font-weight: 600; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .skill-group:hover { border-color: var(--accent); }
+
+    .skill-group-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .skill-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    .skill-pill {
+      padding: 0.35rem 0.85rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.78rem;
+      color: var(--text);
+    }
+
+    /* CONTACT */
+    .contact-inner {
+      max-width: 700px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .contact-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--surface2);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .contact-card-text { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+    .contact-card-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 1.5rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); padding: 3rem 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SP</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-label">Available for work · Austin, TX</div>
+    <h1 class="hero-name">
+      <span>Sebastian</span>
+      <span>Pandovski</span>
+    </h1>
+    <p class="hero-tagline">
+      <strong>Video Editor & Content Creator</strong> who built two social media brands to
+      <strong>700K+ followers</strong> and <strong>200M+ likes</strong> from scratch.
+      D1 athlete. UW-Madison grad. Now building in Austin.
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- STATS -->
+<div class="stats fade-in">
+  <div class="stat">
+    <div class="stat-num">700K+</div>
+    <div class="stat-label">Combined Followers</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">200M+</div>
+    <div class="stat-label">Total Likes</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">300%+</div>
+    <div class="stat-label">View Growth</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Accounts Built & Sold</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fade-in">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        I am a <strong>Video Editor, Content Creator, and Digital Marketer</strong> based in Austin, TX.
+        I built two TikTok brands from zero to a combined 700K+ followers and 200M+ total likes
+        across TikTok, YouTube, and Instagram — entirely through organic strategy, data-driven
+        optimization, and relentless execution.
+      </p>
+      <p>
+        My background spans <strong>video editing, thumbnail design, paid social advertising,
+        web development, and brand strategy</strong>. I have run Meta Ads campaigns for clients,
+        redesigned websites from scratch, and grown audiences in highly competitive niches
+        without a budget or a team.
+      </p>
+      <p>
+        Before going all-in on content, I was a <strong>Division I soccer player</strong> at
+        UW-Milwaukee and graduated from <strong>UW-Madison</strong> with a degree in Art and
+        a Certificate in Video Editing & Graphic Design.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Video Editing</span>
+        <span class="tag">Thumbnail Design</span>
+        <span class="tag">Social Media</span>
+        <span class="tag">Meta Ads</span>
+        <span class="tag">Web Design</span>
+        <span class="tag">Content Strategy</span>
+        <span class="tag">D1 Athlete</span>
+        <span class="tag">Austin TX</span>
+      </div>
+    </div>
+    <div class="about-links">
+      <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="about-link">
+        <div class="about-link-left">
+          <div class="about-link-icon">🎵</div>
+          <div>
+            <div class="about-link-text">@fluent_futbol</div>
+            <div class="about-link-sub">492K followers · 117M likes</div>
+          </div>
+        </div>
+        <div class="about-link-arrow">↗</div>
+      </a>
+      <a href="https://www.tiktok.com/@fluent_futbol_ll" target="_blank" class="about-link">
+        <div class="about-link-left">
+          <div class="about-link-icon">🎵</div>
+          <div>
+            <div class="about-link-text">@fluent_futbol_ll</div>
+            <div class="about-link-sub">204K followers · 40.5M likes</div>
+          </div>
+        </div>
+        <div class="about-link-arrow">↗</div>
+      </a>
+      <a href="https://d1youthsports.com" target="_blank" class="about-link">
+        <div class="about-link-left">
+          <div class="about-link-icon">⚽</div>
+          <div>
+            <div class="about-link-text">D1 Youth Sports</div>
+            <div class="about-link-sub">Website redesign · Client project</div>
+          </div>
+        </div>
+        <div class="about-link-arrow">↗</div>
+      </a>
+      <a href="https://www.linkedin.com/in/sebastianpandovski" target="_blank" class="about-link">
+        <div class="about-link-left">
+          <div class="about-link-icon">💼</div>
+          <div>
+            <div class="about-link-text">LinkedIn</div>
+            <div class="about-link-sub">Sebastian Pandovski</div>
+          </div>
+        </div>
+        <div class="about-link-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="fade-in">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Selected Work</h2>
+    <p class="section-sub">From viral social media brands to paid campaigns and web redesigns — here is what I have built.</p>
+  </div>
+  <div class="work-grid fade-in">
+
+    <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="work-card card-tiktok">
+      <div class="work-card-img">⚽</div>
+      <div class="work-card-body">
+        <div class="work-card-cat">Social Media · Content Creation</div>
+        <div class="work-card-title">Fluent Futbol — Brand Build & Exit</div>
+        <div class="work-card-desc">Built two football content brands from zero to a combined 700K+ followers and 200M+ total likes organically. Grew, scaled, and successfully exited both accounts.</div>
+        <div class="work-card-meta">
+          <div class="meta-item">Followers: <span>700K+</span></div>
+          <div class="meta-item">Likes: <span>200M+</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://d1youthsports.com" target="_blank" class="work-card card-d1">
+      <div class="work-card-img">🌐</div>
+      <div class="work-card-body">
+        <div class="work-card-cat">Web Design · Development</div>
+        <div class="work-card-title">D1 Youth Sports — Website Redesign</div>
+        <div class="work-card-desc">Full redesign of d1youthsports.com for a sports organization with 500+ registered youth athletes. Designed all visual assets, UX, and layout from concept through launch.</div>
+        <div class="work-card-meta">
+          <div class="meta-item">Type: <span>Paid Client</span></div>
+          <div class="meta-item">Year: <span>2025</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="work-card card-cam">
+      <div class="work-card-img">📱</div>
+      <div class="work-card-body">
+        <div class="work-card-cat">Paid Media · Meta Ads</div>
+        <div class="work-card-title">Cam Will — Meta Ads Campaign</div>
+        <div class="work-card-desc">Planned and executed a full Meta Ads campaign across Facebook and Instagram. Managed creative, audience targeting, budget allocation, and performance optimization.</div>
+        <div class="work-card-meta">
+          <div class="meta-item">Platform: <span>Meta</span></div>
+          <div class="meta-item">Year: <span>2025</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="work-card card-vid">
+      <div class="work-card-img">🎬</div>
+      <div class="work-card-body">
+        <div class="work-card-cat">Video Editing · Post Production</div>
+        <div class="work-card-title">Short Form Video — 200+ Videos</div>
+        <div class="work-card-desc">Produced, edited, and published 200+ short-form videos using Adobe Premiere Pro, CapCut, and DaVinci Resolve Studio. Grew average views by 300%+ through data-driven optimization.</div>
+        <div class="work-card-meta">
+          <div class="meta-item">Videos: <span>200+</span></div>
+          <div class="meta-item">Growth: <span>300%+</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="work-card card-design">
+      <div class="work-card-img">🎨</div>
+      <div class="work-card-body">
+        <div class="work-card-cat">Graphic Design · Branding</div>
+        <div class="work-card-title">Brand Assets & Graphic Design</div>
+        <div class="work-card-desc">Created brand identities, thumbnails, social graphics, and visual assets across multiple projects using Adobe Photoshop, Illustrator, Canva, and AI design tools.</div>
+        <div class="work-card-meta">
+          <div class="meta-item">Tools: <span>Adobe Suite</span></div>
+          <div class="meta-item">Type: <span>Multi-project</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.tiktok.com/@fluent_futbol_ll" target="_blank" class="work-card card-social">
+      <div class="work-card-img">📊</div>
+      <div class="work-card-body">
+        <div class="work-card-cat">Social Strategy · Analytics</div>
+        <div class="work-card-title">Multi-Platform Content Strategy</div>
+        <div class="work-card-desc">Managed simultaneous content distribution across TikTok, Instagram, and YouTube Shorts. Used platform analytics to optimize posting cadence, formats, and engagement tactics.</div>
+        <div class="work-card-meta">
+          <div class="meta-item">Platforms: <span>4+</span></div>
+          <div class="meta-item">Accounts: <span>Sold</span></div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="fade-in">
+    <div class="section-label">What I Use</div>
+    <h2 class="section-title">Skills & Tools</h2>
+    <p class="section-sub">The full stack of tools I use to create, distribute, and optimize content.</p>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="skill-group-title">Video Editing</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Adobe Premiere Pro</span>
+        <span class="skill-pill">DaVinci Resolve Studio</span>
+        <span class="skill-pill">After Effects</span>
+        <span class="skill-pill">CapCut</span>
+        <span class="skill-pill">iMovie</span>
+        <span class="skill-pill">OBS Studio</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Design</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Adobe Photoshop</span>
+        <span class="skill-pill">Adobe Illustrator</span>
+        <span class="skill-pill">Canva</span>
+        <span class="skill-pill">Adobe Firefly</span>
+        <span class="skill-pill">Leonardo.ai</span>
+        <span class="skill-pill">Figma</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Content & Social</div>
+      <div class="skill-pills">
+        <span class="skill-pill">TikTok</span>
+        <span class="skill-pill">Instagram</span>
+        <span class="skill-pill">YouTube Shorts</span>
+        <span class="skill-pill">Meta Ads</span>
+        <span class="skill-pill">Platform Analytics</span>
+        <span class="skill-pill">Content Strategy</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Web & Development</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Web Design</span>
+        <span class="skill-pill">WordPress</span>
+        <span class="skill-pill">Vercel</span>
+        <span class="skill-pill">GitHub</span>
+        <span class="skill-pill">Cursor</span>
+        <span class="skill-pill">HTML / CSS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--surface); border-top: 1px solid var(--border);">
+  <div class="contact-inner fade-in">
+    <div class="section-label">Let's Work Together</div>
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-sub">Available for video editing, content creation, social media management, and digital marketing roles. Based in Austin, TX. Open to remote work.</p>
+    <div class="contact-grid">
+      <a href="mailto:seb.pando10@gmail.com" class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-card-text">Email</div>
+          <div class="contact-card-sub">seb.pando10@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/sebastianpandovski" target="_blank" class="contact-card">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-card-text">LinkedIn</div>
+          <div class="contact-card-sub">Sebastian Pandovski</div>
+        </div>
+      </a>
+      <a href="https://www.tiktok.com/@fluent_futbol" target="_blank" class="contact-card">
+        <div class="contact-icon">🎵</div>
+        <div>
+          <div class="contact-card-text">TikTok</div>
+          <div class="contact-card-sub">@fluent_futbol</div>
+        </div>
+      </a>
+      <a href="https://www.tiktok.com/@fluent_futbol_ll" target="_blank" class="contact-card">
+        <div class="contact-icon">🎵</div>
+        <div>
+          <div class="contact-card-text">TikTok II</div>
+          <div class="contact-card-sub">@fluent_futbol_ll</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Sebastian Pandovski</div>
+  <div class="footer-copy">© 2026 · Austin, TX · Built with purpose</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 6 + 'px';
+    cursor.style.top = e.clientY - 6 + 'px';
+    ring.style.left = e.clientX - 18 + 'px';
+    ring.style.top = e.clientY - 18 + 'px';
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
